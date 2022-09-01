@@ -1,27 +1,25 @@
-const bl = require('../businessLogic/bl')
-const uuid = require('uuid');
+const bl = require("../businesLogic/bl");
+const uuid = require("uuid");
 
 
-async function addHotel(req, res) {
+async function post(req, res) {
     try {
         const { body } = req;
-        //todo validation yup
         if (!body.name) {
             throw {
                 status: 400,
                 error: { message: 'لطفا نام هتل ارسال نمایید' }
             }
         }
-        const hotelData = {
+        const inputData = {
             id: uuid.v4(),
             name: body.name,
-            address: body.address,
-            star: body.star,
-            city: body.city
+            body: body.body
         }
-        const result = await bl.addHotel(hotelData);
+        const result = await bl.addpost(inputData);
         res.send(result);
     } catch (err) {
+        console.log(err)
         err.status = err.status || 500;
         res.status(err.status).send({
             error: err.error || { message: 'مشکلی برای سرور رخ داده است لطفا پیگیری نمایید' },
@@ -29,24 +27,21 @@ async function addHotel(req, res) {
     }
 }
 
-async function getHotel(req, res) {
-    try {
-        let result;
-        if (req.query.id)
-            result = await bl.getHotel({ id: req.query.id });
-        else
-            result = await bl.getHotels();
-
-        res.send(result);
-    } catch (err) {
-        err.status = err.status || 500;
-        res.status(err.status).send({
-            error: err.error || { message: 'مشکلی برای سرور رخ داده است لطفا پیگیری نمایید' },
-        })
+async function uploadimage(req, res) {
+    console.log(req.file);
+    if (!req.file) {
+        console.log("no file recived");
+        return res.send({
+            success: false
+        });
+    } else {
+        console.log("file recived");
+        return res.send({
+            success: true
+        });
     }
 }
-
-async function updateHotel(req, res) {
+async function updatepost(req, res) {
     try {
         if (!req.body.id) {
             throw {
@@ -55,7 +50,7 @@ async function updateHotel(req, res) {
             }
         }
         const inputData = req.body;
-        let result = await bl.updateHotel(inputData);
+        let result = await bl.updatepost(inputData);
         res.send(result);
     } catch (err) {
         err.status = err.status || 500;
@@ -64,8 +59,7 @@ async function updateHotel(req, res) {
         })
     }
 }
-
-async function deleteHotel(req, res) {
+async function deletepost(req, res) {
     try {
         if (!req.query.id) {
             throw {
@@ -74,7 +68,7 @@ async function deleteHotel(req, res) {
             }
         }
         const inputData = { id: req.query.id };
-        let result = await bl.deleteHotel(inputData);
+        let result = await bl.deletepost(inputData);
         res.send(result);
     } catch (err) {
         err.status = err.status || 500;
@@ -83,5 +77,4 @@ async function deleteHotel(req, res) {
         })
     }
 }
-
-module.exports = { addHotel, getHotel, updateHotel, deleteHotel }
+module.exports = { post, uploadimage, updatepost, deletepost };
