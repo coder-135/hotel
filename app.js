@@ -4,8 +4,8 @@ const config = require('./utils/initializer');
 const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 const app = express();
 const morgan = require('morgan');
-const hotelRoutes = require('./services/Hotel/routes');
-const post = require("./services/post/routes");
+const fs = require('fs');
+const serviceNames = fs.readdirSync('./services');
 app.use(morgan('dev'));
 
 
@@ -13,8 +13,13 @@ app.use(express.json({ limit: '50mb' }));
 
 app.use(cors());
 
-app.use('/api', hotelRoutes)
-app.use('/api', post)
+
+
+serviceNames.forEach(serviceName => {
+    const service = require(`./services/${serviceName}/routes.js`)
+    app.use('/api', service)
+});
+
 
 
 
