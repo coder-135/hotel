@@ -6,6 +6,7 @@ const app = express();
 const morgan = require('morgan');
 const fs = require('fs');
 const serviceNames = fs.readdirSync('./services');
+app.use('/uploads',express.static(__dirname+'/uploads/'));
 app.use(morgan('dev'));
 
 

@@ -23,7 +23,7 @@ async function  updateHotel(inputData) {
 
 async function deleteHotel(inputData) {
   //todo validate existence of hotel
-   await config.mongoDB.collection('hotels').deleteOne({id: inputData.id}, {projection: {_id: 0}});
+   await config.mongoDB.collection('hotels').deleteOne({id: inputData.id});
 }
 
 module.exports = {addHotel, getHotels, getHotel,updateHotel,deleteHotel}
