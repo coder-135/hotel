@@ -1,6 +1,18 @@
 const repository = require('../repository/repository');
+const bcrypt = require('bcryptjs');
+
+
 
 async function addUser(inputData) {
+    let { password } = inputData;
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) throw err;
+        bcrypt.hash(password, salt, async(err, hash) => {
+            if (err) throw err;
+            await ({...inputData, password: hash });
+        })
+    })
+
     await repository.addUser(inputData);
     delete inputData._id;
     return {

@@ -7,7 +7,7 @@ async function addUser(req, res) {
     try {
         const { body } = req;
 
-        const inputData = schema.validate({
+        const inputData = await schema.validate({
             id: uuid.v4(),
             fullname: body.fullname,
             email: body.email,
