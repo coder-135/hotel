@@ -1,9 +1,10 @@
 const bl = require('../businessLogic/bl')
 const uuid = require('uuid');
-
+const {checkAccess} = require('../../../utils/accessControl')
 
 async function addHotel(req, res) {
     try {
+        await checkAccess(req,res,'addHotel')
         const { body } = req;
         //todo validation yup
         if (!body.name) {
@@ -31,6 +32,7 @@ async function addHotel(req, res) {
 
 async function getHotel(req, res) {
     try {
+        await checkAccess(req,res,'getHotel')
         let result;
         if (req.query.id)
             result = await bl.getHotel({ id: req.query.id });
@@ -48,6 +50,7 @@ async function getHotel(req, res) {
 
 async function updateHotel(req, res) {
     try {
+        await checkAccess(req,res,'updateHotel')
         if (!req.body.id) {
             throw {
                 status: 400,
@@ -67,6 +70,7 @@ async function updateHotel(req, res) {
 
 async function deleteHotel(req, res) {
     try {
+        await checkAccess(req,res,'deleteHotel')
         if (!req.query.id) {
             throw {
                 status: 400,
