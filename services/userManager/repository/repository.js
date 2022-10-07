@@ -35,5 +35,5 @@ async function findUser(query) {
             message: err.message,
         }
     }
-};
+}
 module.exports = { addUser, getUser, getUsers, updateUser, deleteUser, findUser };

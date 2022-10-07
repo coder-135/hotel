@@ -2,16 +2,16 @@ const bl = require('../businesLogic/bl');
 const uuid = require('uuid');
 const { schema } = require('../../../utils/yup');
 const bcrypt = require('bcryptjs');
-
+const moment = require('moment-jalaali');
 async function addUser(req, res) {
     try {
         const { body } = req;
-
         const inputData = await schema.validate({
             id: uuid.v4(),
-            fullname: body.fullname,
+            fullName: body.fullName,
             email: body.email,
             password: body.password,
+            createdAt: moment().format('jYYYY/jMM/jDD -- HH:mm:ss'),
             age: body.age
         });
 
@@ -25,7 +25,7 @@ async function addUser(req, res) {
         })
     }
 
-};
+}
 async function getUser(req, res) {
     try {
         let result;

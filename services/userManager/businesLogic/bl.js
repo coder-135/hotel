@@ -4,15 +4,9 @@ const bcrypt = require('bcryptjs');
 
 
 async function addUser(inputData) {
-    let { password } = inputData;
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) throw err;
-        bcrypt.hash(password, salt, async(err, hash) => {
-            if (err) throw err;
-            await ({...inputData, password: hash });
-        })
-    })
-
+    //todo check email exists
+    // status 409
+    inputData.password  = await bcrypt.hash(inputData.password, 10);
     await repository.addUser(inputData);
     delete inputData._id;
     return {

@@ -1,18 +1,18 @@
 const repositori = require('../repository/repository');
 const generate = require('../../../utils/generate');
-
+const bcrypt = require('bcryptjs')
 const login = async(inputData) => {
     try {
-        const userData = await repositori.findUser({ email: inputData.email });
+        const userData = await repositori.findUser({ email: inputData.email});
         if (!userData) {
             throw {
                 message: 'کاربر مورد نظر یافت نشد',
                 status: 404
             }
         }
-        if (userData.password === inputData.password) {
-            const accessToken = generate.access(userData.phoneNumber);
-
+        const isPasswordCorrect = await bcrypt.compare(inputData.password, userData.password);
+        if (isPasswordCorrect) {
+            const accessToken = generate.access(userData.id);
             return {
                 status: 200,
                 data: {
@@ -25,7 +25,7 @@ const login = async(inputData) => {
             }
         } else {
             throw {
-                message: 'passwod or email is wrong ',
+                message: 'password or email is wrong ',
                 status: 400
             }
         }

@@ -5,10 +5,10 @@ const { addUser, getUser, updateUser, deleteUser } = require('./controller/contr
 const { login } = require('../userManager/auth/login');
 
 
-router.post('/login', login);
+router.put('/login', login);
 router.post('/register', addUser);
-router.get('/register', getUser);
-router.put('/upload', updateUser);
-router.delete('/register', deleteUser);
+router.get('/user', getUser);
+router.put('/user', updateUser);
+router.delete('/user', deleteUser);
 
 module.exports = router;
