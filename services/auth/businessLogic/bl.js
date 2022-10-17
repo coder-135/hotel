@@ -1,9 +1,32 @@
-const repositori = require('../repository/repository');
+const repository = require('../repository/repository');
 const generate = require('../../../utils/generate');
 const bcrypt = require('bcryptjs')
+
+async function register(inputData) {
+    const user = await repository.findUser({ email: inputData.email });
+    if (user) {
+        return {
+            status: 409,
+            data: {
+                message: 'این کاربر در پایگاه داده موجود است لطفا لاگین بنمایید'
+            }
+        }
+    }
+
+    inputData.password = await bcrypt.hash(inputData.password, 10);
+    await repository.register(inputData);
+    delete inputData._id;
+    return {
+        message: 'اطلاعات شما با موفقیت ثبت شد',
+        result: inputData
+    }
+}
+
+
+
 const login = async(inputData) => {
     try {
-        const userData = await repositori.findUser({ email: inputData.email});
+        const userData = await repository.findUser({ email: inputData.email });
         if (!userData) {
             throw {
                 message: 'کاربر مورد نظر یافت نشد',
@@ -45,5 +68,6 @@ const login = async(inputData) => {
 
 
 module.exports = {
-    login
+    login,
+    register
 }

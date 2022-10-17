@@ -1,9 +1,11 @@
 const bl = require('../businesLogic/bl');
 const uuid = require('uuid');
 const moment = require('moment-jalaali');
+const {checkAccess} = require('../../../utils/accessControl');
 
 async function addContent(req, res) {
   try {
+    await checkAccess(req,res,'addContent');
     //todo add validation
     const {body} = req;
     const inputData = {
@@ -26,6 +28,7 @@ async function addContent(req, res) {
 
 async function getContent(req, res) {
   try {
+    await checkAccess(req,res,'getContent');
     //todo pagination logic needed
     let inputData = {}
     if (req.params.id) {
@@ -59,6 +62,7 @@ async function uploadImage(req, res) {
 
 async function updateContent(req, res) {
   try {
+    await checkAccess(req,res,'updateContent');
     if (!req.params.id) {
       throw {
         status: 400,
@@ -81,6 +85,7 @@ async function updateContent(req, res) {
 
 async function deleteContent(req, res) {
   try {
+    await checkAccess(req,res,'deleteContent');
     if (!req.params.id) {
       throw {
         status: 400,

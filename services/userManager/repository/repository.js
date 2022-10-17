@@ -36,4 +36,4 @@ async function findUser(query) {
         }
     }
 }
-module.exports = { addUser, getUser, getUsers, updateUser, deleteUser, findUser };
+module.exports = { addUser, getUser, getUsers, updateUser, deleteUser,findUser };

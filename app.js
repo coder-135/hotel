@@ -6,9 +6,9 @@ const app = express();
 const morgan = require('morgan');
 const fs = require('fs');
 const serviceNames = fs.readdirSync('./services');
-app.use('/uploads',express.static(__dirname+'/uploads/'));
+app.use('/uploads', express.static(__dirname + '/uploads/'));
 app.use(morgan('dev'));
-
+const path = require('path');
 
 app.use(express.json({ limit: '50mb' }));
 
@@ -21,6 +21,9 @@ serviceNames.forEach(serviceName => {
     app.use('/api', service)
 });
 
+app.use((req, res) => {
+    return res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 
 
