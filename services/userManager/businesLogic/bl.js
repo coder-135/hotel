@@ -8,7 +8,7 @@ async function addUser(inputData) {
     // status 409
     const user = await repository.findUser({ email: inputData.email });
     if (user) {
-        return {
+        throw {
             status: 409,
             data: {
                 message: 'این کاربر در پایگاه داده موجود است لطفا لاگین بنمایید'
