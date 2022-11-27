@@ -1,12 +1,12 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
-const {addHotel,getHotel,updateHotel,deleteHotel} = require('./controller/controller')
+const { addHotel, getHotel, updateHotel, deleteHotel } = require('./controller/controller')
 
 
 router.post('/hotel', addHotel);
-router.get('/hotel', getHotel);
-router.put('/hotel', updateHotel);
-router.delete('/hotel', deleteHotel);
+router.get('/hotel/:id', getHotel);
+router.put('/hotel/:id', updateHotel);
+router.delete('/hotel/:id', deleteHotel);
 
 
 module.exports = router;

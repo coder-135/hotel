@@ -4,14 +4,12 @@ const bcrypt = require('bcryptjs');
 
 
 async function addUser(inputData) {
-    //todo check email exists
-    // status 409
     const user = await repository.findUser({ email: inputData.email });
     if (user) {
         throw {
             status: 409,
             data: {
-                message: 'این کاربر در پایگاه داده موجود است لطفا لاگین بنمایید'
+                message: 'please login'
             }
         }
     }

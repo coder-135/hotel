@@ -7,8 +7,8 @@ const { addUser, getUser, updateUser, deleteUser } = require('./controller/contr
 
 
 router.post('/user', addUser);
-router.get('/user', getUser);
+router.get('/user/:id', getUser);
 router.put('/user', updateUser);
-router.delete('/user', deleteUser);
+router.delete('/user/:id', deleteUser);
 
 module.exports = router;
