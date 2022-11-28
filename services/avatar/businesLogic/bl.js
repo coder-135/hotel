@@ -7,15 +7,14 @@ const setAvatar = async(req) => {
     try {
         const filename = `${req.file.filename}`;
         const inputData = {
-            id: req.id,
-            avatarUrl: `https://localhost:5000/uploads/${filename}`
+            avatarUrl: `http://localhost:5000/uploads/${filename}`
         }
 
-        await repo.updateAvatar(inputData);
+        const result = await repo.updateAvatar(inputData);
 
         return {
             status: 'success',
-            data: inputData,
+            data: result,
             message: 'عکس پروفایل با موفقیت آپدیت شد',
         }
     } catch (err) {

@@ -9,6 +9,8 @@ const uploadAvatar = async(req, res) => {
             status: 400,
             message: 'عکسی انتخاب نشده است'
         }
+
+
         let result = await bl.setAvatar(req);
         res.status(200).send(result);
 
