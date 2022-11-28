@@ -9,11 +9,11 @@ async function createQuestion(inputData) {
         result: inputData
     }
 }
-async function getQuestion(inputData) {
-    const result = await repository.getQuestion(inputData);
+async function getQuestion() {
+    const result = await repository.getQuestion();
     return {
         message: 'success',
-        result
+        result: result[0]
     }
 }
 

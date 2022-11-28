@@ -25,7 +25,7 @@ async function createQuestion(req, res) {
 async function getQuestion(req, res) {
     try {
         let result;
-        result = await bl.getQuestion({ id: req.query.id });
+        result = await bl.getQuestion();
         res.send(result);
     } catch (err) {
         console.log(err)

@@ -2,6 +2,7 @@ const repository = require('../repository/repository')
 
 
 async function addHotel(inputData) {
+  //ighkhjhjkl
   await repository.addHotel(inputData);
   delete inputData._id;
   return {

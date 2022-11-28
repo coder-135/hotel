@@ -8,8 +8,8 @@ async function addComment(inputData) {
         result: inputData
     }
 }
-async function getComments() {
-    const result = await repository.getComments();
+async function getComments(query) {
+    const result = await repository.getComments(query);
     return {
         message: 'success',
         result

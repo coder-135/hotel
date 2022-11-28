@@ -3,8 +3,8 @@ const config = require('../../../utils/initializer');
 async function addComment(inputData) {
     await config.mongoDB.collection('comments').insertOne(inputData);
 }
-async function getComments() {
-    return await config.mongoDB.collection('comments').find({}, { projection: { _id: 0 } }).toArray();
+async function getComments(query) {
+    return await config.mongoDB.collection('comments').find(query, { projection: { _id: 0 } }).toArray();
 }
 async function getComment(inputData) {
     return await config.mongoDB.collection('comments').find({ postId: inputData.id } || { userId: inputData.id }, { projection: { _id: 0 } }).toArray();

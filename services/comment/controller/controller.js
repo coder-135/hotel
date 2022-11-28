@@ -24,11 +24,20 @@ async function addComment(req, res) {
 }
 async function getComments(req, res) {
     try {
+        const query = {}
+
+        if(req.query.postId) {
+            query.postId = req.query.postId
+        }
+        if(req.query.userId) {
+            query.postId = req.query.userId
+        }
         let inputData = {}
+        const userId = req.query.postId;
         if (req.body.id) {
             inputData = { id: req.body.id }
         }
-        const result = await bl.getComments();
+        const result = await bl.getComments(query);
         res.send(result);
     } catch (err) {
         err.status = err.status || 500;
