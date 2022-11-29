@@ -15,13 +15,13 @@ async function getComments(query) {
         result
     }
 }
-async function getComment(inputData) {
-    const result = await repository.getComment(inputData);
-    return {
-        message: 'کامنت های این پست با موفقیت دریافت شدند',
-        result
-    }
-}
+// async function getComment(inputData) {
+//     const result = await repository.getComment(inputData);
+//     return {
+//         message: 'کامنت های این پست با موفقیت دریافت شدند',
+//         result
+//     }
+// }
 async function deleteComment(inputData) {
     await repository.deleteComment(inputData);
     return {
@@ -30,4 +30,4 @@ async function deleteComment(inputData) {
 }
 
 
-module.exports = { addComment, getComments, getComment, deleteComment };
+module.exports = { addComment, getComments, deleteComment };

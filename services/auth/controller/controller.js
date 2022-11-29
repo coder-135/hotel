@@ -16,7 +16,7 @@ async function register(req, res) {
             fullName: body.fullName,
             email: body.email,
             password: body.password,
-            avatar: 'https://localhost:5000/api/uploads',
+            avatar: 'http://localhost:5000/uploads',
             createdAt: moment().format('jYYYY/jMM/jDD -- HH:mm:ss'),
             age: body.age,
             role: 'USER'

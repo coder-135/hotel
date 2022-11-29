@@ -24,18 +24,13 @@ async function addComment(req, res) {
 }
 async function getComments(req, res) {
     try {
-        const query = {}
+        let query = {}
 
-        if(req.query.postId) {
+        if (req.query.postId) {
             query.postId = req.query.postId
         }
-        if(req.query.userId) {
-            query.postId = req.query.userId
-        }
-        let inputData = {}
-        const userId = req.query.postId;
-        if (req.body.id) {
-            inputData = { id: req.body.id }
+        if (req.query.userId) {
+            query.userId = req.query.userId
         }
         const result = await bl.getComments(query);
         res.send(result);
@@ -46,21 +41,21 @@ async function getComments(req, res) {
         })
     }
 }
-async function getComment(req, res) {
-    try {
-        let inputData = {}
-        if (req.params.id) {
-            inputData = { id: req.params.id }
-        }
-        const result = await bl.getComment(inputData);
-        res.send(result);
-    } catch (err) {
-        err.status = err.status || 500;
-        res.status(err.status).send({
-            error: err.error || { message: 'مشکلی برای سرور رخ داده است لطفا پیگیری نمایید' },
-        })
-    }
-}
+// async function getComment(req, res) {
+//     try {
+//         let inputData = {}
+//         if (req.params.id) {
+//             inputData = { id: req.params.id }
+//         }
+//         const result = await bl.getComment(inputData);
+//         res.send(result);
+//     } catch (err) {
+//         err.status = err.status || 500;
+//         res.status(err.status).send({
+//             error: err.error || { message: 'مشکلی برای سرور رخ داده است لطفا پیگیری نمایید' },
+//         })
+//     }
+// }
 
 async function deleteComment(req, res) {
     try {
@@ -81,4 +76,4 @@ async function deleteComment(req, res) {
         })
     }
 }
-module.exports = { addComment, getComments, getComment, deleteComment };
+module.exports = { addComment, getComments, deleteComment };

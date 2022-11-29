@@ -6,9 +6,9 @@ async function addComment(inputData) {
 async function getComments(query) {
     return await config.mongoDB.collection('comments').find(query, { projection: { _id: 0 } }).toArray();
 }
-async function getComment(inputData) {
-    return await config.mongoDB.collection('comments').find({ postId: inputData.id } || { userId: inputData.id }, { projection: { _id: 0 } }).toArray();
-}
+// async function getComment(inputData) {
+//     return await config.mongoDB.collection('comments').find({ postId: inputData.id }, { projection: { _id: 0 } }).toArray();
+// }
 async function deleteComment(inputData) {
     const result = await config.mongoDB.collection('comments').deleteOne({ id: inputData.id });
     if (result.deletedCount === 0) {
@@ -30,4 +30,4 @@ async function deleteComment(inputData) {
 
 
 
-module.exports = { addComment, getComments, getComment, deleteComment };
+module.exports = { addComment, getComments, deleteComment };
