@@ -7,8 +7,7 @@ async function createQuestion(req, res) {
         const inputData = {
             id: uuid.v4(),
             question: body.question,
-            answer: body.answer,
-            role: 'ADMIN'
+            answer: body.answer
         };
 
         const result = await bl.createQuestion(inputData);

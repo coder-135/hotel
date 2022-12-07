@@ -10,6 +10,7 @@ const registerSchema = yup.object().shape({
 const loginSchema = yup.object().shape({
     email: yup.string().email().required('please enter your email'),
     password: yup.string().required('please enter your password because password is required'),
+    answer: yup.string().required('please enter answer the question')
 });
 const contentSchema = yup.object().shape({
     title: yup.string().required('the title is required'),
